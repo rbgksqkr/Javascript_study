@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+        <style>
+            h1{
+                background-color: black;
+                color : white;
+                display:inline;
+            }
+            p{
+                border-top : solid 1px gray;
+                padding-top : 10px;
+            }
+            a{
+                color : blue;
+            }
+            @media(min-width: 800px)
+            {
+                p{
+                    border-top:none;
+                }
+            }
+        </style>
+        <title></title>
+
+        <script>
+            function LinksSetColor(color){
+     
+            }
+            var Body = {
+                setColor:function (color){
+                    document.querySelector('body').style.color = color;                    
+                },
+
+                setBackgroundColor:function (color){
+                    document.querySelector('body').style.backgroundColor = color;
+                }
+            } 
+
+            var Links = {
+                setColor:function (color){
+                    var alist = document.querySelectorAll('a');
+                    var i = 0;       
+                    while(i<alist.length)
+                    {
+                        alist[i].style.color = color;
+                        i = i + 1;
+                    }   
+                }
+            }          
+
+            function nightDayHandler(self){
+                var target = document.querySelector('body');
+
+                if(self.value === 'night'){
+                    Body.setBackgroundColor('black');
+                    Body.setColor('white');
+                    self.value = 'day';  
+
+                    Links.setColor('white');
+                }
+                else{
+                    Body.setBackgroundColor('white');
+                    Body.setColor('black');
+                    self.value = 'night'; 
+
+                    Links.setColor('blue');
+                } 
+            }
+        </script>
+    </head>
+    
+    <body>
+        <h1>Java Script</h1><br>
+        <!--아래 버튼과 같은 의미 자기자신을 의미하면 id를 지정해줄 필요없이 this 키워드 사용. 중복되는 문장은 변수처리 var target.
+        <input id="night_day" type="button" value="night" onclick="
+        if(document.querySelector('#night_day').value === 'night'){
+            document.querySelector('body').style.backgroundColor = 'black';
+            document.querySelector('body').style.color = 'white';
+            document.querySelector('#night_day').value = 'day';          
+        }
+        else{
+            document.querySelector('body').style.backgroundColor = 'white';
+            document.querySelector('body').style.color = 'black';
+            document.querySelector('#night_day').value = 'night'; 
+        } 
+        ">
+         -->
+         <!--
+        <input type="button" value="night" onclick="
+            var target = document.querySelector('body');
+            var alist = document.querySelectorAll('a');
+            var i = 0;
+             if(this.value === 'night'){
+                 target.style.backgroundColor = 'black';
+                target.style.color = 'white';
+                this.value = 'day';          
+                while(i<alist.length)
+                {
+                    alist[i].style.color = 'yellow';
+                    i = i + 1;
+                }
+             }
+            else{
+                target.style.backgroundColor = 'white';
+                target.style.color = 'black';
+                this.value = 'night'; 
+                while(i<alist.length)
+                {
+                    alist[i].style.color = 'blue';
+                    i = i + 1;
+                }               
+        ">
+        -->
+
+        <input type="button" value="night" onclick="
+            nightDayHandler(this);
+        ">
+        
+        <p>
+            <li><a href = "1.html">html</a></li>
+            <li><a href = "2.html">css</a></li>
+            <li><a href = "3.html">javascript</a></li>
+        </p>
+        <p>
+        JavaScript (/ˈdʒɑːvəˌskrɪpt/),[6] often abbreviated as JS, is a programming language that conforms to the ECMAScript specification.[7] JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.
+        Alongside HTML and CSS, JavaScript is one of the core technologies of the World Wide Web.[8] JavaScript enables interactive web pages and is an essential part of web applications. The vast majority of websites use it for client-side page behavior,[9] and all major web browsers have a dedicated JavaScript engine to execute it.
+        </p>
+    </body>
+</html>
