@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+  <title>WEB1 - Welcome</title>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="colors.js"></script>
+  <script src="fetch/fetch.js"></script> 
+  <!--polyfill : fetch API 와 같은 최신 기능들이 지원되지 않는 브라우저에서도 작동할 수 있도록 해줌 --> 
+</head>
+<body>
+  <h1><a href="#!welcome" onclick="fetchPage('welcome')">WEB</a></h1>
+  <input id="night_day" type="button" value="night" onclick="
+    nightDayHandler(this);
+  ">
+  <ol id="nav">
+  
+  </ol>
+  <article>
+
+  </article>
+  
+  <script>
+    //fetch('html') : html 이라는 파일을 서버에 요청. response 라는 객체 받음.
+    //Asynchronous(비동기) 처리
+    function fetchPage(name){
+      fetch(name).then(function(response){
+        response.text().then(function(text){
+            document.querySelector('article').innerHTML = text;
+        })
+      }); 
+    }
+
+    // url 에서 # 식별
+    if(location.hash){
+      fetchPage(location.hash.substr(2));
+    } else{
+      fetchPage('welcome');
+    }
+    // 데이터와 코드 분리(index.html <-> list)
+    fetch('list').then(function(response){
+        response.text().then(function(text){
+          var items = text.split(',');
+          var tags = '';
+          for(var i = 0; i < items.length; i++)
+          {
+            var item = items[i];
+            item.trim();
+            //<li><a href="#!css" onclick="fetchPage('css')">CSS</a></li>
+            var tag = '<li><a href="#!'+item+'"'+ ' onclick="fetchPage(\''+item+'\')">'+item+'</li>';
+            tags = tags + tag;
+            console.log(item);
+          }
+          
+          document.querySelector('#nav').innerHTML = tags;
+        })
+    })
+
+  </script>
+</body>
+</html>
